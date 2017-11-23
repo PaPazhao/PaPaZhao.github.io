@@ -5,12 +5,16 @@
   
   <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="隐式动画当你改变CALayer的一个动画属性的值，这个改变不会立刻在屏幕上展示出来，而是从先前的值平滑过渡到新的值。这个动画过程我们并没有指定任何动画的类型仅仅是改变了一个属性的值而已，这就是隐式动画。  动画执行时间取决于当前事务的设置    动画类型取决于图层行为   动画不需要再Core Animation中手动">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/08/29/隐式动画/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="隐式动画当你改变CALayer的一个动画属性的值，这个改变不会立刻在屏幕上展示出来，而是从先前的值平滑过渡到新的值。这个动画过程我们并没有指定任何动画的类型仅仅是改变了一个属性的值而已，这就是隐式动画。  动画执行时间取决于当前事务的设置    动画类型取决于图层行为   动画不需要再Core Animation中手动打开，但是需要明确的关闭，否则他会一直存在    下面这个例子展示了一个修改背景">
+<meta property="og:updated_time" content="2017-08-30T10:09:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="隐式动画当你改变CALayer的一个动画属性的值，这个改变不会立刻在屏幕上展示出来，而是从先前的值平滑过渡到新的值。这个动画过程我们并没有指定任何动画的类型仅仅是改变了一个属性的值而已，这就是隐式动画。  动画执行时间取决于当前事务的设置    动画类型取决于图层行为   动画不需要再Core Animation中手动打开，但是需要明确的关闭，否则他会一直存在    下面这个例子展示了一个修改背景">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -59,149 +63,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/11/23/hello-world/" class="article-date">
-  <time datetime="2017-11-23T07:11:56.000Z" itemprop="datePublished">2017-11-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/23/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/23/hello-world/" data-id="cjac60s9d00001nkgkgl4jnnn" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-变换" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/09/01/变换/" class="article-date">
-  <time datetime="2017-09-01T09:05:59.000Z" itemprop="datePublished">2017-09-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="变换"><a href="#变换" class="headerlink" title="变换"></a>变换</h1><h2 id="仿射变换"><a href="#仿射变换" class="headerlink" title="仿射变换"></a>仿射变换</h2><p>UIView的transform属性是一个 CGAffineTransform 类型用于在二位空间内做旋转、缩放和平移。CGAffineTransform是一个可以和二维空间向量做乘法的3X2矩阵。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/01/变换/" data-id="cjac60s9r00031nkgtfw90x9w" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-专用图层" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/09/01/专用图层/" class="article-date">
-  <time datetime="2017-09-01T09:05:37.000Z" itemprop="datePublished">2017-09-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="专用图层"><a href="#专用图层" class="headerlink" title="专用图层"></a>专用图层</h1><p> <code>CAShapeLayer</code> : 通过矢量而不是Bitmap来绘制图层，相比使用 <code>Core Graphics</code> 直接向CALayer的内容绘制路径有如下优势:  </p>
-<ul>
-<li><strong>渲染快速</strong>。 由于 <code>CAShapeLayer</code> 使用了硬件加速，绘制同一个图形比 <code>Core Graphics</code> 快很多。  </li>
-<li><strong>高效使用内存</strong>。 一个 <code>CAShapeLayer</code> 不需要像普通CALayer一样创建一个寄宿图形，所以无论有多大都不会占用太多内存。</li>
-<li><strong>不会被图层边界裁剪</strong>。一个 <code>CAShapeLayer</code> 可以在边界之外绘制，并且不会像使用 <code>Core Graphics</code> 的普通CALayer一样被裁剪。</li>
-<li><strong>不会出现像素化</strong>。 当你给CAShapeLayer做3D变换它不像一个有寄宿图的普通图层一样变得像素化。</li>
-</ul>
-<h2 id="创建CGPath"><a href="#创建CGPath" class="headerlink" title="创建CGPath"></a>创建CGPath</h2><p>CAShapeLayer 可以用来绘制所有能够通过 CGPath 来表示的形状。这个形状不一定要闭合，图层路径也不一定要不可破，事实上你可以在一个图层上绘制好几个不同的形状。<br>你可以控制一些属性比如<br>(线宽，用点表示单位)，<br>lineCap (线条结尾的样子)<br>(线条之间的结合点的样 子);<br>但是在图层层面你只有一次机会设置这些属性。</p>
-<p>如果你想用不同颜色或风格来绘制多个形状，就不得不为每个形状准备一个图层了。</p>
-<p> CAShapeLayer 属性是   类型，但是我们用 UIBezierPath 帮助 类创建了图层路径，这样我们就不用考虑人工释放 了。图6.1是代码运行 的结果。虽然还不是很完美，但是总算知道了大意对吧!</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">    func shapLayer() &#123;</span><br><span class="line">        let path = UIBezierPath()</span><br><span class="line">        </span><br><span class="line">        path.move(to: CGPoint(x: 175, y: 100))</span><br><span class="line">        path.addArc(withCenter: CGPoint(x: 150, y: 100), radius: 25, startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: true)</span><br><span class="line">        path.move(to: CGPoint(x:150, y:125))</span><br><span class="line">        path.addLine(to:  CGPoint(x:150, y: 175))</span><br><span class="line">        path.addLine(to: CGPoint(x:125, y: 225))</span><br><span class="line">        path.move(to: CGPoint(x: 150, y: 175))</span><br><span class="line">        path.addLine(to:  CGPoint(x:175, y: 225))</span><br><span class="line">        path.move(to: CGPoint(x:100, y:150))</span><br><span class="line">        path.addLine(to:  CGPoint(x:200, y:150))</span><br><span class="line">        </span><br><span class="line">        let shaperLayer = CAShapeLayer()</span><br><span class="line">        shaperLayer.strokeColor = UIColor.red.cgColor</span><br><span class="line">        shaperLayer.fillColor = UIColor.clear.cgColor</span><br><span class="line">        shaperLayer.lineWidth = 5</span><br><span class="line">        shaperLayer.lineCap = kCALineCapRound</span><br><span class="line">        shaperLayer.lineJoin = kCALineJoinRound</span><br><span class="line">        shaperLayer.path = path.cgPath</span><br><span class="line">        self.view.layer.addSublayer(shaperLayer)</span><br><span class="line">    &#125;</span><br><span class="line">```    </span><br><span class="line"></span><br><span class="line">## 圆角</span><br><span class="line">使用CAShapeLayer可以单独制定每个圆角。</span><br></pre></td></tr></table></figure>
-<p>func twoCorner() -&gt; UIBezierPath {<br>    let rect = CGRect(x: 50, y: 50, width: 100, height: 100)<br>    let radii = CGSize(width: 20, height: 20)</p>
-<pre><code>return UIBezierPath(roundedRect: rect, byRoundingCorners: [.topLeft, .topRight], cornerRadii: radii)
-</code></pre><p>}<br>```<br>我们可以通过这个图层路径绘制一个既有直角又有圆角的View。<br>如果我们想依照这个图形来裁剪View内容我们可以把CAShapeLayer作为视图的宿主图层，而不是添加一个值·子视图。</p>
-<p>#CATextLayer<br>如果你想在一个图层里面显示文字，可以借助图层代理直接将字符串使用CoreGraphics写入图层内容。</p>
-<p>CoreAnimation提供了一个CALayer的子类CATextLayer，它以图层的形式包含了UILabl几乎所有的绘制特性并且额外提供了一些新特性。CATextLayer使用了CoreText渲染速度很快。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/01/专用图层/" data-id="cjac60s9o00021nkg83u1nk6c" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-README" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/08/29/README/" class="article-date">
-  <time datetime="2017-08-29T10:16:48.000Z" itemprop="datePublished">2017-08-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="PaPaZhao-github-io"><a href="#PaPaZhao-github-io" class="headerlink" title="PaPaZhao.github.io"></a>PaPaZhao.github.io</h1>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/29/README/" data-id="cjac60s9j00011nkgla7i6kes" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-隐式动画" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-隐式动画" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/08/29/隐式动画/" class="article-date">
   <time datetime="2017-08-29T08:44:48.000Z" itemprop="datePublished">2017-08-29</time>
@@ -343,10 +205,23 @@ override func touchesBegan(_ touches: Set&lt;UITouch&gt;, with event: UIEvent?) 
     </footer>
   </div>
   
-</article>
-
+    
+<nav id="article-nav">
+  
+    <a href="/2017/08/29/README/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+</nav>
 
   
+</article>
 
 </section>
         
