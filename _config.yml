@@ -1,49 +1,36 @@
-# Basic
-title: 秘密基地
-subtitle: 欢迎来到秘密基地
-welcome_message: <a href="" target="_blank">开始旅程</a>
-description: Vno Jekyll is a port of my Ghost theme vno.
-creator: <a href="http://www.baidu.com">@onevcat</a>
+# Permalinks
+permalink:           pretty
 
-url: "http://www.sino.com"
+# Setup
+title:               Swift 小专栏
+url:                 http://swifxiaozhuanlan.com
+paginate:            10
+baseurl:             ""
+analytics_id:        //UA-18491817-18
 
-permalink: /:year/:month/:title/
+# Assets
+#
+# We specify the directory for Jekyll so we can use @imports.
+sass:
+  sass_dir:          _sass
+  style:            :compressed
 
-# Format
-highlighter: rouge
+# About/contact
+author:
+  name:              zhao
+  url:               https://twitter.com/papazhao
+  email:             15431230@qq.com
 
-# supported colors: blue, green, purple, red, orange or slate. If you need clear, leave it empty.
-cover_color: navy
+# Custom vars
+version:             2.0.0
+github:
+  repo:              https://github.com/PaPazhao/PaPaZhao.github.io
 
-# The blog button should not be removed.
-blog_button:
-    title: 主页
-    description: Visit blog
-
-# Navigation buttons in the front page.
-nav:
-    - {title: Projects, description: My Projects, url: 'http://wwww.blank.com'}
-    # - {title: Another Button, description: A button, url: 'http://example.com'}
-
-# Pagination
-gems: [jekyll-paginate]
-paginate: 10
-paginate_path: "page/:num/"
-
-# Comment
-comment:
-    disqus: vno-jekyll
-    # duoshuo: 
-    
-# Social
-social:
-    # weibo: onevcat
-    github: PaPaZhao
-    # twitter: onevcat
-    # gplus: 107108267983477358170
-    mail: lizhao15431230@qq.com
-
-# Google Analytics
-ga:
-    # id: your_ga_id
-    # host: your_host
+# Gems
+plugins:
+  - jekyll-avatar
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-paginate
+  - jekyll-gist
