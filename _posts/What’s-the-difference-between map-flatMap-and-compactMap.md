@@ -4,8 +4,8 @@ layout: post
 date: 2020-05-14
 
 ---
-# ![swift-tips](../public/swift-tips.png)
 
+# ![swift-tips](../public/swift-tips.png)
 在 Swift 标准库里提供了 `map`、`flatMap` 和 `compactMap` 三个协议方法。他们都是函数式编程中用于对序列进行变换的方法，他们的用法看上去非常相似，但是他们有着不同的功能。因此本文详细聊一下 `map`、`flatMap` 和 `compactMap` 三个方法在不同的场景如何使用。
 
 从命名上看，在这三个方法里具有相同的部分 `map` ，`map` 可以理解成映射、变换。他是对元素进行变型的方法，也就是可以把一个元素从 A 变成 B，A 和 B 可以是同一种类型，也可以是不同的类型。如果序列实现这一方法那么就可以对序列进行变换，把序列的所有元素使用同一方法进行变换。
