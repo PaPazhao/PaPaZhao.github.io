@@ -1,5 +1,5 @@
 ---
-title: 函数式编程：从 map、flatMap 和 compactMap  开始
+title: Swift 函数式编程：从 map、flatMap 和 compactMap  开始
 layout: post
 date: 2020-05-14
 
