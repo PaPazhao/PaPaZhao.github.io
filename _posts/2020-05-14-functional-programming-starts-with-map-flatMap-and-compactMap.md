@@ -1,5 +1,5 @@
 ---
-title: Swift 标准库里的三个 map、flatMap 和 compactMap 方法你知道有什么不同吗?
+title: 从 Swift 标准库里的三个方法 map、flatMap 和 compactMap 来聊一聊函数式编程?
 layout: post
 date: 2020-05-14
 
@@ -21,8 +21,6 @@ array.map { $0 * 2 }
 ```
 
 还可以调用数组的元素的方法来执行变换：
-
-对序列进行遍历，然后通过 transform 闭包提供的方法对遍历取出的元素进行变换，生成一个新的值。  把一个序列转换成另一个序列，序列的长度保持不变。
 
 ```swift
 let cast = ["Vivien", "Marlon", "Kim", "Karl"]
@@ -72,14 +70,16 @@ let students = [
 
 ```swift
 var bestTemp: (student: Student, totalScore: Float)?
+/// 0、遍历学生
 for curStudent in students {
     var totalScore: Float = 0
-    /// 通过遍历 scores，累计各个科目的成绩求总分
+    /// 1、求当前学生的总分: 通遍历 scores，累加各个科目的成绩求总分
     for key in Subject.allCases {
         totalScore += curStudent.scores[key] ?? 0
     }
-    /// 计算平均分
+    /// 2、计算平均分
     let average = totalScore / Float(Subject.allCases.count)
+    /// 3、记录成绩最好的学生
     if let tmp = bestTemp {
         if average > tmp.totalScore {
             bestTemp = (curStudent, average)
@@ -88,6 +88,7 @@ for curStudent in students {
         bestTemp = (curStudent, average)
     }
 }
+/// 输出结果
 if let best = bestTemp {
     print("最高平均分: \(best.1), 姓名: \(best.0.name)")
 } else {
@@ -99,7 +100,7 @@ if let best = bestTemp {
 
 ## 声明式编程
 
-指令式的编程是开发者告诉计算机一步一步的指令，计算机通过按部就班的执行来完成开发者代码意图。而声明式编程则不然，声明式编程并不关心计算机如何去做，他更关心的是告诉计算机我要做什么，很多具体的细节可以由编译器来和标准库来实现而不需要开发者来关心，开发者需要要描述需要计算机最终完成的结果。Swift 语言的函数式编程范式来实现声明式的编程范式。对于上面的例子，采用函数式的编程方式可以改写成:
+指令式的编程是开发者告诉计算机一步一步的指令，计算机通过按部就班的执行来完成开发者代码意图。而声明式编程则不然，声明式编程并不关心计算机如何去做，他更关心的是告诉计算机我要做什么，很多具体的细节可以由编译器来和标准库来封装实现而不需要开发者来关心，开发者需要要描述需要计算机最终完成的结果。Swift 语言的函数式编程范式来实现声明式的编程范式。对于上面的例子，采用函数式的编程方式可以改写成:
 
 ```swift
 /// 求平均分
@@ -150,13 +151,13 @@ extension Sequence {
 }
 ```
 
-可以看出在标准库中把对序列进行遍历的操作封装在 map 内部，因为这部分功能是不需要开发者关心的，而需要开发者关心的仅仅是对序列元素如何变换，也就是 transform 闭包。
+可以看出在标准库中把对序列进行遍历的操作封装在 map 内部，因为这部分功能是不需要开发者关心的，而需要开发者关心的仅仅是我该采用什么样的方法对序列元素如何变换，也就是如何实现 transform 闭包。
 
-对应变换方法 transform 执行后转换的类型支持任意类型，所以转换后的序列元素可以是 `Optional` 类型。那么序列中就可能存在有 nil 的情况，然而我们只关心有值的情况，在这种情况下序列的 ni 就变得很烦人，因为后续的操作我们需要对元素进行解包判断，我们需要过滤掉 nil，此时你需要 `compactMap:` 方法
+对应变换方法 transform 执行后转换的类型支持任意类型，所以转换后的序列元素可以是 `Optional` 类型。那么序列中就可能存在有 nil 的情况，然而很多时候我们只关心有值的情况，在这种情况下序列的 ni 就变得很烦人（因为要不停的去解包，而且还可能有 `Optional` 嵌套的情况），因为后续的操作我们需要对元素进行解包判断，我们需要过滤掉 nil，此时你需要 `compactMap:` 方法
 
 ## **compactMap**:
 
-下面是  [Swift 标准库中 Sequence 的 compactMap: 方法实现](https://github.com/apple/swift/blob/9ae451d3226bc51a86a07bda19e672ca57b7d155/stdlib/public/core/SequenceAlgorithms.swift) 
+`compactMap`  就是应对原始序列的元素经过 transform 转换后返回 `Optional` 的情况，通过对`Optional` 解包后返回 `non-Optional` 类型的元素。下面是  [Swift 标准库中 Sequence 的 compactMap: 方法实现](https://github.com/apple/swift/blob/9ae451d3226bc51a86a07bda19e672ca57b7d155/stdlib/public/core/SequenceAlgorithms.swift) 
 
 ```swift
 /// 通过 transform 对原序列进行变换，并且过滤掉 nil,  返回一个非空的序列。
@@ -181,7 +182,7 @@ extension Sequence {
 }
 ```
 
-通过源码可以看出 `compactMap` 是对原序列进行遍历，然后解包过滤掉 nil ，然后返回一个新的序列。
+通过源码可以看出 `compactMap` 是对原序列进行遍历，然后解包过滤掉 nil ，然后返回一个新的 `non-Optional` 序列。
 
 ### 简单的示例:
 
@@ -195,11 +196,11 @@ let compactMapped: [Int] = possibleNumbers.compactMap { str in Int(str) }
 // [1, 2, 5]
 ```
 
-在 Swift 中返回 `Optional` 的情况非常常见，对于这样的情况使用 `compactMap:` 非常方便
+在 Swift 中返回 `Optional` 的情况非常常见，所以对于这样的情况使用 `compactMap:` 非常方便，有效的避免了层层解包，代码的可读性更高。
 
 ## flatMap
 
-`map` 和 `flatMap` 的不同主要在于 `transform` 方法。`map` 方法是由元素到元素的变换，而 `flatMap` 是由元素到序列的变化 `transform:(Element)  -> Sequence` 
+`map` 和 `flatMap` 的不同主要在于 `transform` 方法。`map` 的 `transform` 方法是由元素到元素的变换：`transform: (Element)  -> T`，而 `flatMap` 的 `transform` 方法是由元素到序列的变换： `transform:(Element)  -> Sequence` ,然后将序列压平连接起来，事实上 `s.flatMap(transform)`  相当于  `Array(s.map(transform).joined())`.
 
 ```swift
 /// 对序列元素进行转换后压平
@@ -228,13 +229,42 @@ let flatMapped = numbers.flatMap { Array(repeating: $0, count: $0) }
 // [1, 2, 2, 3, 3, 3, 4, 4, 4, 4]
 ```
 
-事实上 `s.flatMap(transform)`  相当于  `Array(s.map(transform).joined())`.
+上面介绍了对于序列的 `map` 、`flatMap` 和 `compactMap` 具体使用，他们都是使用函数式思想对于多个元素的序列进行变换的操作。然而在单个元素也同样适用，比如对 `Optional` 的变化。现实中我们经常会遇到对 Optional 进行多层操作的情况，比如我们的用户系统存储了用户的个人信息比如头像的图片文件路径，我们拿到这个头像路径字符串后需要转换成对应的 URL 链接去响应的服务器下载图片然后显示。
 
- 
+从服务器获取的用户头像资源如下
+
+```swift
+/// 某个用户的头像路径
+var avatarFilePath: String? = "/images/avatar001.jpg"
+```
+
+由于存在用户没有设置头像的情况所以这里的 avatarFilePath 类型是可选的: `String?`。 接下来我们需要把图片路径和 服务器地址（"www.abc.com/v1"） 合成真正的链接。
+
+```swift
+var avatarURLString: String? = "www.abc.com/v1/images/avatar001.jpg"
+```
+
+得到了图片的链接字符串以后我们生成 URL 实例，然后拿着这个 URL去下载并展示用户的头像了，代码如下：
+
+```swift
+/// 构建用户头像 URL
+func buildUserAvatar(with path: String?) -> URL? {
+    if let avatarPath = path {
+        let avatarURLStr = "www.abc.com/v1\(avatarPath)"
+        return URL(string: avatarURLStr)
+    }
+    return nil
+}
+let url = buildUserAvatar(with: "/images/avatar.jpg")
+print(url)
+/// Optional(www.abc.com/v1/images/avatar.jpg)
+```
+
+上面代码中实现并不复杂，但是如果情况变化一下我需要进一步的操作，比如通过添加 URL 参数返回不同的大小的图片，那么这样的函数会变的复杂起来，尤其面对可选值多次嵌套的情况，那么对应的结果可能是多层的 `if let` 嵌套的代码结构。这样的代码结构不可读、难维护。同样面对这样的情况 Optional 提供了函数式的操作方法 `map` 和 `flatMap` 下面是二者的介绍。
 
 ## Optional 的 map
 
-`Optional ` 同样提供了 `map` 方法，仅仅在有值的情况下进行变换。下面是 [Swift 标准库 Optional 中 map 的实现](https://github.com/apple/swift/blob/master/stdlib/public/core/Optional.swift)
+`Optional ` 提供了 `map` 方法，他仅仅在有值的情况下进行变换。下面是 [Swift 标准库 Optional 中 map 的实现](https://github.com/apple/swift/blob/master/stdlib/public/core/Optional.swift)
 
 
 ```swift
@@ -250,6 +280,8 @@ public func map<U>(_ transform: (Wrapped) throws -> U)
 ```
 
 ### 简单的例子:
+
+对可选类型 `Int?` 进行算术运算，通常我们需要先进行解包，然后再运算。但是我们的目的只是对数据进行运算并不关心如何去做（先解包，后计算），如何去做影响了我们的实现逻辑，使得代码功能变得不单一，因此 `map` 的实现把我们不关心的内容进行封装，使得我们只用关心自己的计算，而不用去操心是否需要解包、如何去解包。
 
 ```swift
 let possibleNumber: Int? = Int("42")
@@ -267,7 +299,7 @@ print(noSquare)
 
 ## Optional 的 flatMap
 
-下面是 [Swift 标准库 Optional 中 flatMap 的实现](https://github.com/apple/swift/blob/master/stdlib/public/core/Optional.swift)
+`map` 解决了自身的`Optional` 解包的问题，那么对应变换方法可能存在返回 `Optional` 的情况，那么 `flatMap` 方法就是解决 transform 后的方法返回  `Optional` 的情况。  下面是 [Swift 标准库 Optional 中 flatMap 的实现](https://github.com/apple/swift/blob/master/stdlib/public/core/Optional.swift)
 
 ```swift
 public func flatMap<U>(_ transform: (Wrapped) throws -> U?) 
@@ -294,5 +326,13 @@ print(nonOverflowingSquare)
 // Prints "Optional(1764)"
 ```
 
- Optional 的 `map` 方法和 `flatMap` 方法非常相似，但是有些不同。不同点在于 transform， map 的 transform 返回的是非可选，而 flatMap 返回的是可选
+通过 `Optional` 的两个方法 `map` 和 `flatMap` 让我们更专注运算，忽略不重要的语言特性上的处理让我们的代码变得更加专注。接下来我们看看如何用 `map` 和 `flatMap` 来实现上面头像的例子
 
+```swift
+func buildUserAvatar(with path: String?) -> URL? {
+    path.map { "www.abc.com/v1\($0)" } /// 1
+        .flatMap { URL(string: $0) } /// 2
+}
+```
+
+从代码可以清晰的看出我们每一步在干嘛，如何我们需要进一步的变换只需要在增加一行变换。这样的链式调用如同管道一样把每一步单一的操作链接起来，组合成非常复杂的功能，这就是函数式编程的威力。
