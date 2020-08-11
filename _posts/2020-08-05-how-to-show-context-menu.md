@@ -13,7 +13,7 @@ public func contextMenu<MenuItems>(
 ```
 contextMenu 由一组按钮组成，MenuItems 遵守 View 协议 。
 
-代码如下
+下面代码实现了一个消息列表 `MessageBox` ，在长按每一条消息的时候会弹出一个 contextMenu 菜单，菜单提供 Copy 或者 Delete 这条信息的菜单
 
 ```swift
 struct MessageBox: View {
@@ -44,7 +44,7 @@ struct MessageBox: View {
                             })
                         }
                 }
-            }
+            }.navigationTitle("信息")
         }
     }
 }
